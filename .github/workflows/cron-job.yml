@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.x'
+        node-version: '18.x'  # Asegúrate de usar una versión reciente
 
     - name: Clean npm cache and install dependencies
       run: |
@@ -26,18 +26,18 @@ jobs:
         npm install
 
     - name: Verify DATABASE_URL
-      run: echo $DATABASE_URL
+      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}"
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     - name: Run Prisma migrations
+      run: npx prisma migrate deploy
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      run: npx prisma migrate deploy
 
     - name: Run cron job
+      run: node src/cronServer.js
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
-      run: node src/cronServer.js
