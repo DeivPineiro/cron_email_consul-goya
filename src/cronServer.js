@@ -4,7 +4,7 @@ const { sendDailyAppointmentsEmail } = require('./services/emailServices.js');
 const { getAdminEmails, getTodaysAppointmentsForAdmin } = require('./services/appointmentService.js');
 
 // Configuración del cron job para enviar correos a las 6 AM cada día
-cron.schedule('0 6 * * *', async () => {
+cron.schedule('* * * * *', async () => {
   console.log('Iniciando tarea de envío de correos de turnos diarios.');
 
   try {

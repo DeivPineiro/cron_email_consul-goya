@@ -1,29 +1,28 @@
-name: Run Cron Job
+name: Daily Email Cron
 
 on:
   schedule:
-    - cron: '0 6 * * *' # Ejecuta a las 6 AM UTC todos los días
-  workflow_dispatch: # Permite ejecutar manualmente desde la interfaz de GitHub
+    - cron: '* * * * *'  # Ejecutar a las 6 AM UTC cada día
 
 jobs:
-  cronjob:
+  send-email:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # Ajusta la versión de Node.js según sea necesario
 
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Run cron server
-        run: node src/cronServer.js
-        env:
-          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run cron job
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      run: node src/cronServer.js
