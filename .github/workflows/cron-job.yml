@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'  # Usa una versión de Node.js reciente
+        node-version: '18.x'  # Asegúrate de especificar la versión correcta
 
     - name: Clean npm cache and install dependencies
       run: |
@@ -27,13 +27,6 @@ jobs:
 
     - name: Run Prisma migrations
       run: npx prisma migrate deploy
-
-    - name: Print Node.js version
-      run: node -v
-
-    - name: Print npm logs
-      run: |
-        cat /home/runner/.npm/_logs/*.log
 
     - name: Run cron job
       env:
