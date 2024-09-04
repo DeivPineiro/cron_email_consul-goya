@@ -2,8 +2,8 @@ name: Daily Email Cron
 
 on:
   schedule:
-    - cron: '* * * * *'  # Ejecutar cada minuto para pruebas
-  workflow_dispatch:  # Permite ejecución manual desde GitHub
+    - cron: '0 7 * * *'  
+  workflow_dispatch:  
 
 jobs:
   send-email:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.x'  # Asegúrate de usar una versión reciente
+        node-version: '18.x'  
 
     - name: Clean npm cache and install dependencies
       run: |

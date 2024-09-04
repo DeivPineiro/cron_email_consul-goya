@@ -1,4 +1,4 @@
-require('dotenv').config(); // Asegúrate de que dotenv esté cargado
+require('dotenv').config();
 
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -9,7 +9,7 @@ const sendDailyAppointmentsEmail = async (adminEmail, appointments) => {
     return;
   }
 
-  // Formatea la hora
+
   const formatDate = (date) => {
     const options = { hour: '2-digit', minute: '2-digit' };
     return new Intl.DateTimeFormat('es-ES', options).format(new Date(date));
@@ -39,9 +39,9 @@ const sendDailyAppointmentsEmail = async (adminEmail, appointments) => {
 
   const msg = {
     to: adminEmail,
-    from: process.env.EMAIL_FROM, // Dirección de correo verificada en SendGrid
+    from: process.env.EMAIL_FROM,
     subject: 'Tus turnos diarios',
-    html: htmlContent, // Utiliza HTML en lugar de texto plano
+    html: htmlContent,
   };
 
   try {

@@ -24,9 +24,9 @@ const getTodaysAppointmentsForAdmin = async (adminId) => {
     },
     select: { 
       patientName: true, 
-      patientSurName: true,  // Asegúrate de tener este campo en tu modelo Prisma
+      patientSurName: true,  
       startTime: true,
-      office: true,  // Asegúrate de tener este campo en tu modelo Prisma
+      office: true,  
     },
   });
 };
