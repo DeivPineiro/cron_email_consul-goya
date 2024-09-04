@@ -15,10 +15,10 @@ const sendDailyAppointmentsEmail = async (adminEmail, appointments) => {
     return new Intl.DateTimeFormat('es-ES', options).format(new Date(date));
   };
 
-  const appointmentList = appointments.map(appointment => 
+  const appointmentList = appointments.map(appointment =>
     `<li>${formatDate(appointment.startTime)}: ${appointment.patientName} ${appointment.patientSurName}, Consultorio ${appointment.office}</li>`
   ).join('');
-
+  console.log(appointmentList);
   const htmlContent = `
     <html>
     <body>
