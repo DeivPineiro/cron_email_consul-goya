@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.x'  # Asegúrate de especificar la versión correcta
+        node-version: '18.x'
 
     - name: Clean npm cache and install dependencies
       run: |
@@ -25,7 +25,14 @@ jobs:
         rm package-lock.json
         npm install
 
+    - name: Verify DATABASE_URL
+      run: echo $DATABASE_URL
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     - name: Run Prisma migrations
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: npx prisma migrate deploy
 
     - name: Run cron job
