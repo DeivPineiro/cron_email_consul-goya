@@ -2,7 +2,7 @@ const cron = require('node-cron');
 const { sendDailyAppointmentsEmail } = require('./services/emailServices.js');
 const { getAdminEmails, getTodaysAppointmentsForAdmin } = require('./services/appointmentService.js');
 
-//7 AM cada día
+//8 AM cada día
 cron.schedule('0 8 * * *', async () => {
   console.log('Iniciando tarea de envío de correos de turnos diarios.');
 
