@@ -3,7 +3,7 @@ const { sendDailyAppointmentsEmail } = require('./services/emailServices.js');
 const { getAdminEmails, getTodaysAppointmentsForAdmin } = require('./services/appointmentService.js');
 
 //8 AM cada día
-cron.schedule('0 8 * * *', async () => {
+cron.schedule('0 14 * * *', async () => {
   console.log('Iniciando tarea de envío de correos de turnos diarios.');
 
   try {
