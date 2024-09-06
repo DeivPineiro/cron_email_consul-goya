@@ -1,9 +1,7 @@
-const cron = require('node-cron');
 const { sendDailyAppointmentsEmail } = require('./services/emailServices.js');
 const { getAdminEmails, getTodaysAppointmentsForAdmin } = require('./services/appointmentService.js');
 
-//8 AM cada día
-cron.schedule('0 14 * * *', async () => {
+async function runTask() {
   console.log('Iniciando tarea de envío de correos de turnos diarios.');
 
   try {
@@ -12,7 +10,10 @@ cron.schedule('0 14 * * *', async () => {
       const appointments = await getTodaysAppointmentsForAdmin(admin.id);
       await sendDailyAppointmentsEmail(admin.email, appointments);
     }
+    console.log('Correos de turnos diarios enviados con éxito.');
   } catch (error) {
     console.error('Error durante la ejecución del cron job:', error);
   }
-});
+}
+
+runTask();
